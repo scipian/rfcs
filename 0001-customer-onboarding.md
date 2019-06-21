@@ -1,6 +1,6 @@
 - Feature Name: `scipian_customer_onboarding`
 - Start Date: 2019-06-21
-- RFC PR: [scipian/rfcs#1](https://github.com/scipian/rfcs/pull/1)
+- RFC PR: [scipian/rfcs#3](https://github.com/scipian/rfcs/pull/3)
 - Community Issue: [scipian/community#6](https://github.com/scipian/community/issues/6)
 
 # Summary
