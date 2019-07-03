@@ -14,7 +14,7 @@ to Scipian.
 # Motivation
 [motivation]: #motivation
 
-There is currently process for a new customer to be onboarded to Scipian. Having
+There is currently no process for a new customer to be onboarded to Scipian. Having
 a smooth process in place will be paramount to onboarding multiple customers
 who want to use Scipian. Having a low barrier of entry will encourage
 teams to use Scipian.
@@ -24,7 +24,7 @@ teams to use Scipian.
 
 Scipian builds on and uses many Kubernetes primitives. Some of these include 
 namespaces and RBAC rules. This allows multiple teams to use Scipian, while 
-keeping each team's data and interactions with Scipian separated from eachother.
+keeping each team's data and interactions with Scipian separated from each other.
 
 For onboarding a new team to the Scipian platform, the following is created:
 
