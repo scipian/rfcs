@@ -25,7 +25,7 @@ After a new customer has been on-boarded, they will have the option to migrate
 their existing Terraform state to Scipian's backend. The process is simple:
 
 1. User will create a Kubernetes secret with their AWS credentials for the 
-AWS acocunt they will be pulling their Terraform state from. As part of the
+AWS account they will be pulling their Terraform state from. As part of the
 onboarding process, appropriate IAM rules will be set up allowing the 
 on-boarding customer CRUD privileges from their account to a namespaced path 
 in Scipian's S3 bucket backend.
