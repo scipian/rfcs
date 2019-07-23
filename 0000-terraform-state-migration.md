@@ -24,11 +24,11 @@ to encouraging users to use Scipian.
 After a new customer has been on-boarded, they will have the option to migrate
 their existing Terraform state to Scipian's backend. The process is simple:
 
-1. User will create 2 Kubernetes secrets, one with their AWS credentials for the 
-AWS acocunt they will be pulling their Terraform state from. The second secret
-they will create will contain temporary AWS credentials for Scipian's account,
-that will have minimal scope (only allowing a push to the Scipian backend 
-bucket), and will have a short TTL.
+1. User will create a Kubernetes secret with their AWS credentials for the 
+AWS acocunt they will be pulling their Terraform state from. As part of the
+onboarding process, appropriate IAM rules will be set up allowing the 
+on-boarding customer CRUD privileges from their account to a namespaced path 
+in Scipian's S3 bucket backend.
 2. User will then run a Kubernetes Job, based on a yaml template provided by
 the Scipian team. This job will run a special Docker image which will pull
 the Terraform state from the user's existing S3 bucket, and push it to Scipian's
@@ -38,7 +38,7 @@ S3 backend.
 [reference-level-explanation]: #reference-level-explanation
 
 - As mentioned above, the migrator is a special Docker image that is
-run by a Kubernetes job. It will rely on certain ENV's to be avaiable, with
+run as a Kubernetes job. It will rely on certain ENV's to be avaiable, with
 information about S3 bucket, Workspace name, Namespace, etc.
 - The special Docker image is a Go app, that utilizes the AWS SDK to pull from
 and push to S3 buckets.
@@ -50,13 +50,9 @@ Job yaml spec:
     - Namespace: the Namespace created in Scipian from the on-boarding customer
     - Workspace: the name of the Workspace of the on-boarding customer's
     Terraform
-    - ONBOARDING_AWS_ACCESS_KEY_ID: the access key to the on-boarding customer's
+    - AWS_ACCESS_KEY_ID: the access key to the on-boarding customer's
     AWS account where the state will be pulled from
-    - ONBOARDING_AWS_SECRET_ACCESS_KEY: secret access key to the above account
-    - SCIPIAN_AWS_ACCESS_KEY_ID: a temporary limited scoped access key to 
-    Scipian's AWS account, which will be used by the state migrator to push
-    state to Scipian's backend
-    - SCIPIAN_AWS_SECRET_ACCESS_KEY: secret access key to the above account
+    - AWS_SECRET_ACCESS_KEY: secret access key to the above account
 
 # Drawbacks
 [drawbacks]: #drawbacks
@@ -89,8 +85,6 @@ outside of the scope of this RFC.
 The following are open questions the Scipian dev community should answer before
 work commences:
 
-- What can be done to automate the creation of Scipian temporary limited access 
-AWS creds to distribute to on-boarding customers
 - Somewhat tied to this process is the question of how best to distribute the 
 Scipian Authentication CLI to onboarding teams?
 - What areas do we need to consider to align us for future iterations and
